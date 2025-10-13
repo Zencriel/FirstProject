@@ -22,3 +22,31 @@ body{
     box-shadow: 0 10px 30px rgba(0,0,0,0.1);
     overflow: hidden;
 }
+
+/* all the different screens below */
+.screen{
+    display: none;
+    padding: 2rem;
+    text-align: center;
+}
+
+.screen.active{
+    display: block;
+}
+
+#Start-Screen h1{
+    color: #2596be;
+    margin-bottom: 20px;
+    font-size: 2.5rem;
+}
+
+#Start-Screen button{
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    border: none;
+    background: #BA2D0B;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
