@@ -16,6 +16,7 @@ body{
 .container{
     position: relative;
     width: 100%;
+    max-width: 850px;
     padding: 40px;
     background: #fff;
     border-radius: 1rem;
@@ -177,8 +178,8 @@ button:hover{
 }
 
 @media (max-width:500px) {
-    .screen {padding: 1rem;}
-    #start-screen h1 {
+    .Screen {padding: 1rem;}
+    #Start-Screen h1 {
     font-size: 2rem;}
     #question-text {font-size: 1.3rem;}
     .answer-btn {
