@@ -60,3 +60,63 @@ const quizQuestions = [
     ],
 },
 ];
+
+let CurrentQuestionIndex = 0;
+let Score = 0;
+let answersDisabled = false;
+
+TotalQuestionsSpan.textContent = quizQuestions.length;
+MaxScoreSpan.textContent = quizQuestions.length;
+
+startButton.addEventListener("click", startQuiz);
+
+function startQuiz(){
+    CurrentQuestionIndex = 0;
+    Score = 0;
+    ScoreSpan.textContent = Score;
+    console.log("Quiz Started");
+
+    StartScreen.classList.remove("Active");
+    QuizScreen.classList.add("Active");
+
+    showquestion();
+}
+
+function showquestion(){
+    answersDisabled = false;
+    const CurrentQuestion = quizQuestions[CurrentQuestionIndex];
+    CurrentQuestionSpan.textContent = CurrentQuestionIndex + 1;
+
+    const progressPercent = ((CurrentQuestionIndex) / quizQuestions.length) * 100;
+    ProgressBar.style.width = progressPercent + "%";
+
+    answersContainer.innerHTML = "";
+    CurrentQuestion.answers.forEach((answer, index) => {
+        const button = document.createElement("button");
+        button.textContent = answer.text;
+        button.classList.add("answer-button");
+        button.dataset.correct = answer.correct;
+        button.addEventListener("click", selectAnswer);
+        answersContainer.appendChild(button);
+    })
+}
+
+function selectAnswer(){
+    if (answersDisabled) return
+
+    answersDisabled = true;
+    const selectedAnswer = event.target
+    const isCorrect = this.dataset.correct === "true";
+
+    Array.from(answersContainer.children).forEach((button) => {
+        if (button.dataset.correct === "true") {
+            button.classList.add("correct");
+        } else {
+            button.classList.add("wrong");
+        }
+    });
+}
+
+function restartQuiz(){
+    console.log("Quiz Restarted");
+}
