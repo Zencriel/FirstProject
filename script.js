@@ -69,6 +69,7 @@ TotalQuestionsSpan.textContent = quizQuestions.length;
 MaxScoreSpan.textContent = quizQuestions.length;
 
 startButton.addEventListener("click", startQuiz);
+RestartButton.addEventListener("click", restartQuiz);
 
 function startQuiz(){
     CurrentQuestionIndex = 0;
@@ -79,16 +80,18 @@ function startQuiz(){
     StartScreen.classList.remove("Active");
     QuizScreen.classList.add("Active");
 
-    showquestion();
+    showQuestion();
 }
 
-function showquestion(){
+function showQuestion(){
     answersDisabled = false;
     const CurrentQuestion = quizQuestions[CurrentQuestionIndex];
     CurrentQuestionSpan.textContent = CurrentQuestionIndex + 1;
 
     const progressPercent = ((CurrentQuestionIndex) / quizQuestions.length) * 100;
     ProgressBar.style.width = progressPercent + "%";
+
+    QuestionText.textContent = CurrentQuestion.question;
 
     answersContainer.innerHTML = "";
     CurrentQuestion.answers.forEach((answer, index) => {
@@ -102,7 +105,7 @@ function showquestion(){
 }
 
 function selectAnswer(){
-    if (answersDisabled) return
+    if (answersDisabled) return;
 
     answersDisabled = true;
     const selectedAnswer = event.target
@@ -111,12 +114,43 @@ function selectAnswer(){
     Array.from(answersContainer.children).forEach((button) => {
         if (button.dataset.correct === "true") {
             button.classList.add("correct");
-        } else {
-            button.classList.add("wrong");
+        } else if (button === (selectedAnswer)) {
+            button.classList.add("incorrect");
         }
     });
+
+    if (isCorrect){
+        Score++;
+        ScoreSpan.textContent = Score;
+    }
+
+    setTimeout(() => {
+        CurrentQuestionIndex++;
+        if (CurrentQuestionIndex < quizQuestions.length){
+            showQuestion();
+        } else {
+            showResult();
+        }
+    }, 1000);
+}
+
+function showResult(){
+    QuizScreen.classList.remove("Active");
+    ResultScreen.classList.add("Active");
+    finalScoreSpan.textContent = Score;
+    const scorePercent = (Score / quizQuestions.length) * 100;
+
+    if (scorePercent >= 80){
+        ResultMessage.textContent = "Excellent work!";
+    } else if (scorePercent >= 50){
+        ResultMessage.textContent = "Good job!";
+    } else {
+        ResultMessage.textContent = "Better luck next time!";
+    }
 }
 
 function restartQuiz(){
+    ResultScreen.classList.remove("Active");
     console.log("Quiz Restarted");
-}
+    startQuiz();
+}   

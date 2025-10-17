@@ -63,11 +63,8 @@ body{
     transform: scale(1.1);
 }
 
-.Quiz-header{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 2rem;
+.question-header{
+margin-bottom: 1rem;
 }   
 
 #question-text{
@@ -77,7 +74,7 @@ body{
     line-height: 1.4;
 }
 
-.Quiz.info{
+.question-info{
     display: flex;
     justify-content: space-between;
     color:deepskyblue;
@@ -121,13 +118,11 @@ body{
 }
 
 .progress-bar{
-    position: absolute;
     height: 15px;
-    background-color: #f2f2f2;
+    background-color: #f8f0e5;
     border-radius: 5px;
     overflow:hidden;
     margin-top: 20px;
-    animation: progressAnimation 15s linear forwards;
 }
 
 .progress{
@@ -135,12 +130,17 @@ body{
     width: 0;
     background-color: #83250b;
     border-radius: 5px;
-    transition: width 0.3s ease-in-out;
+    transition: width 0.3s ease;
 }
 
 #result-screen h1{
-    color: #cf3c94;
+    color: #7eb070;
     margin-bottom: 20px;
+}
+
+.question-info{
+    margin-bottom: 10px;
+    color: darkgrey;
 }
 
 .result-info{
@@ -159,7 +159,7 @@ body{
 #result-message{
     font-size: 1.5rem;
     font-weight: bold;
-    color: #2596be;
+    color: #7eb070;
 }
 
 button{
@@ -182,7 +182,7 @@ button:hover{
     #Start-Screen h1 {
     font-size: 2rem;}
     #question-text {font-size: 1.3rem;}
-    .answer-btn {
+    .answer-button {
     padding: 12px;}
     button {
     padding: 12px 25px;
